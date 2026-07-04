@@ -1,8 +1,7 @@
 // swift-tools-version: 5.9
 //
 //  llama.cpp 公式ビルド b9860（Gemma 4対応）の xcframework を
-//  「path型」で参照する版。zip展開が不要なため、iPadOSに unzip が
-//  存在しない問題を回避できる。
+//  「path型」で参照する版。
 //
 //  リポジトリ構成（Package.swiftと同じ階層に展開済みフレームワークを置く）:
 //    Package.swift
