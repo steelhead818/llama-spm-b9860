@@ -1,19 +1,22 @@
 // swift-tools-version: 5.9
 //
-//  llama.cpp 公式プレビルド xcframework（b9860 / Gemma 4対応）を
-//  Swift Playgrounds から使うための極小パッケージ。
+//  llama.cpp 公式ビルド b9860（Gemma 4対応）の xcframework を
+//  「path型」で参照する版。zip展開が不要なため、iPadOSに unzip が
+//  存在しない問題を回避できる。
 //
-//  ★ コミット前に1箇所だけ書き換え:
-//     checksum の値を、Windowsで計算したSHA256（小文字64桁・空白なし）に置き換える。
-//     計算方法は手順書のとおり（certutil または PowerShell）。
+//  リポジトリ構成（Package.swiftと同じ階層に展開済みフレームワークを置く）:
+//    Package.swift
+//    llama.xcframework/
+//      ├ Info.plist            ← ios-arm64 以外のエントリを削除して編集
+//      └ ios-arm64/
+//          └ llama.framework/  ← 実機用スライスのみ残す（dSYMsは削除）
 //
 import PackageDescription
 
 let package = Package(
     name: "llama",
     platforms: [
-        .iOS(.v17),
-        .macOS(.v14)
+        .iOS(.v17)
     ],
     products: [
         .library(name: "llama", targets: ["llama"])
@@ -21,8 +24,7 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "llama",
-            url: "https://github.com/ggml-org/llama.cpp/releases/download/b9860/llama-b9860-xcframework.zip",
-            checksum: "ここをSHA256の小文字64桁に置き換える"
+            path: "llama.xcframework"
         )
     ]
 )
